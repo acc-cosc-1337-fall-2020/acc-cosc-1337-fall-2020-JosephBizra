@@ -34,22 +34,32 @@ char get_letter_grade_using_switch(int grade)
 {
     char letter_grade;
 
-    switch (grade)
+    switch (grade/10)
     {
-    case 90:
+    case 9:
         letter_grade = 'A';
         break;
-    case 80:
+    case 8:
         letter_grade = 'B';
         break;
-    case 70:
+    case 7:
         letter_grade = 'C';
         break;
-    case 60:
+    case 6:
         letter_grade = 'D';
+        break;
+    case 5:
+    case 4:
+    case 3:
+    case 2:
+    case 1:
+    case 0:
+        letter_grade = 'F';
         break;
     default:
-        letter_grade = 'D';
+        letter_grade = 'I';//invalid must use string
         break;
     }
+
+    return letter_grade;
 }
