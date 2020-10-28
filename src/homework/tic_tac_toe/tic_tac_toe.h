@@ -13,8 +13,9 @@ private:
     void set_next_player();
     bool check_board_full();
     void clear_board();
-public:
     vector<string> pegs{" ", " ", " ", " ", " ", " ", " ", " ", " "};
+public:
+    
     void display_board() const;
     string get_player() const;
     void mark_board(int position);
