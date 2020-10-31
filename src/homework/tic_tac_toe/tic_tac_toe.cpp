@@ -46,23 +46,118 @@ bool tic_tac_toe::check_board_full()
     return full;
 }
 
+bool tic_tac_toe::check_column_win()
+{
+    if (((pegs[0] == "x") && (pegs[3] == "x") && (pegs[6] == "x")) || ((pegs[1] == "x") && (pegs[4] == "x") && (pegs[7] == "x")) || ((pegs[2] == "x") && (pegs[5] == "x") && (pegs[8] == "x")))
+    {
+        return true;
+    }
+    else if (((pegs[0] == "o") && (pegs[3] == "o") && (pegs[6] == "o")) || ((pegs[1] == "o") && (pegs[4] == "o") && (pegs[7] == "o")) || ((pegs[2] == "o") && (pegs[5] == "o") && (pegs[8] == "o")))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool tic_tac_toe::check_row_win()
+{
+    if (((pegs[0] == "x") && (pegs[1] == "x") && (pegs[2] == "x")) || ((pegs[3] == "x") && (pegs[4] == "x") && (pegs[5] == "x")) || ((pegs[6] == "x") && (pegs[7] == "x") && (pegs[8] == "x")))
+    {
+        return true;
+    }
+    else if (((pegs[0] == "o") && (pegs[1] == "o") && (pegs[2] == "o")) || ((pegs[3] == "o") && (pegs[4] == "o") && (pegs[5] == "o")) || ((pegs[6] == "o") && (pegs[7] == "o") && (pegs[8] == "o")))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool tic_tac_toe::check_diagonal_win()
+{
+    if (((pegs[0] == "x") && (pegs[4] == "x") && (pegs[8] == "x")) || ((pegs[2] == "x") && (pegs[4] == "x") && (pegs[6] == "x")))
+    {
+        return true;
+    }
+    else if (((pegs[0] == "o") && (pegs[4] == "o") && (pegs[8] == "o")) || ((pegs[2] == "o") && (pegs[4] == "o") && (pegs[6] == "o")))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+// your instructions say to just set winner to the player's opposite value.
+void tic_tac_toe::set_winner()
+{
+    if (player == "x")
+    {
+        winner = "o";
+    }
+    else
+    {
+        winner = "x";
+    }
+}
+
+string tic_tac_toe::get_winner() const
+{
+    return winner;
+}
+
 void tic_tac_toe::mark_board(int position)
 {
     int pos = position-1;
 
-    if (position%2 != 0)
+    pegs[pos] = player;
+
+    if (position < 9)
     {
-        pegs[pos] = player;
-    }
-    else
-    {
-        pegs[pos] = next_player;
+        pegs[position] = next_player;
     }
 }
 
 bool tic_tac_toe::game_over()
 {
-    return check_board_full();
+    bool game_over = false;
+
+    if (testing == false)
+    {
+        if (check_column_win() || check_row_win() || check_diagonal_win())
+        {
+            game_over = true;
+            set_winner();
+        }
+        else if (check_board_full())
+        {
+            game_over = true;
+            winner = "c";
+        }
+    }
+    else
+    {
+        if (check_board_full())
+        {
+            game_over = true;
+            winner = "c";
+        }
+    }
+
+    if (game_over == true)
+    {
+        string winner = get_winner();
+
+        cout<<"Winner is "<<winner<<"\n";
+    }
+
+    return game_over;
 }
 
 void tic_tac_toe::set_next_player()
@@ -80,4 +175,10 @@ void tic_tac_toe::set_next_player()
 string tic_tac_toe::get_player() const
 {
     return player;
+}
+
+void tic_tac_toe::set_test()
+{
+    testing = true;
+    cout<<"testing = true"<<"\n";
 }
