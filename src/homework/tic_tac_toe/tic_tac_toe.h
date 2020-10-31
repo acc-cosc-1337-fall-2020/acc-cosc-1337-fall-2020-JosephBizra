@@ -20,9 +20,10 @@ private:
     bool check_row_win();
     bool check_diagonal_win();
     void set_winner();
+    
 public:
-    void set_test();
     vector<string> pegs{" ", " ", " ", " ", " ", " ", " ", " ", " "};
+
     void display_board() const;
     string get_player() const;
     void mark_board(int position);
@@ -30,4 +31,5 @@ public:
     bool game_over();
 
     string get_winner() const;
+    void set_test();
 };
