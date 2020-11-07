@@ -19,18 +19,18 @@ void tic_tac_toe::start_game(string first_player)
     set_next_player();
 }
 
-void tic_tac_toe::display_board() const
-{
-    for (int i = 0; i < 9; i++)
-    {
-        cout<<"|"<<pegs[i]<<"|";
+// void tic_tac_toe::display_board() const
+// {
+//     for (int i = 0; i < 9; i++)
+//     {
+//         cout<<"|"<<pegs[i]<<"|";
 
-        if (((i+1)%3) == 0 )
-        {
-            cout<<"\n";
-        }
-    }
-}
+//         if (((i+1)%3) == 0 )
+//         {
+//             cout<<"\n";
+//         }
+//     }
+// }
 
 bool tic_tac_toe::check_board_full()
 {
@@ -181,4 +181,26 @@ void tic_tac_toe::set_test()
 {
     testing = true;
     cout<<"testing = true"<<"\n";
+}
+
+ostream &operator<<( ostream &output, const tic_tac_toe &t )
+{
+    for (int i = 0; i < 9; i++)
+        {
+            output <<"|"<<t.pegs[i]<<"|";
+
+            if (((i+1)%3) == 0 )
+            {
+                output<<"\n";
+            }
+        }
+    return output;
+}
+
+istream &operator>>( istream  &input, tic_tac_toe &f )
+{
+    cout<<"Enter a position between 1 and 9: ";
+    input >> f.inPos;
+    f.mark_board(f.inPos);
+    return input;
 }

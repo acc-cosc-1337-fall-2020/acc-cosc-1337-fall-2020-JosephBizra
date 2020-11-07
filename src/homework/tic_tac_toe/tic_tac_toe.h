@@ -1,4 +1,5 @@
 //h
+#pragma once
 #include<iostream>
 #include<string>
 #include<vector>
@@ -23,8 +24,9 @@ private:
     
 public:
     vector<string> pegs{" ", " ", " ", " ", " ", " ", " ", " ", " "};
+    int inPos;
 
-    void display_board() const;
+    // void display_board() const;
     string get_player() const;
     void mark_board(int position);
     void start_game(string first_player);
@@ -32,4 +34,8 @@ public:
 
     string get_winner() const;
     void set_test();
+
+    friend ostream &operator<<( ostream &output, const tic_tac_toe &t );
+
+    friend istream &operator>>( istream  &input, tic_tac_toe &f );
 };

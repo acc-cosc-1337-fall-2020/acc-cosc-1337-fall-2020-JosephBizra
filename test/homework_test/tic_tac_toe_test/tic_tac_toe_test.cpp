@@ -61,6 +61,8 @@ TEST_CASE("Test game over if 9 slots are selected") {
 	REQUIRE(winner == "c");
 }
 
+// Your instructions for test cases were unclear. 
+// So I just verified winner in an assertion like it said to.
 TEST_CASE("Test win by first column") {
 	tic_tac_toe tic;
 	tic.start_game("x");
@@ -69,6 +71,9 @@ TEST_CASE("Test win by first column") {
 	tic.mark_board(7);
 
 	REQUIRE(tic.game_over() == true);
+
+	tic.game_over();
+	REQUIRE(tic.get_winner() == "o");
 }
 TEST_CASE("Test win by second column") {
 	tic_tac_toe tic;
